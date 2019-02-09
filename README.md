@@ -2,4 +2,4 @@
 
 Some mainstream configuration templates. 
 
-According to the situation, the configuration file may need to be modified slightly (such as changing the address, port number, UUID, etc.)
+According to the situation, the configuration file may need to be modified slightly (such as changing the **address**, **port number**, **UUID**, etc.)
