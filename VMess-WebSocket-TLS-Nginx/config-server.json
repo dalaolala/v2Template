@@ -1,0 +1,65 @@
+{
+	"log": {
+		"loglevel": "warning"
+	},
+	"inbounds": [
+		{
+			"port": 20000,
+			"listen":"127.0.0.1",
+			"protocol": "vmess",
+			"sniffing": {
+				"enabled": true,
+				"destOverride": [
+					"http",
+					"tls"
+				]
+			},
+			"settings": {
+				"clients": [
+					{
+						"id": "595f612c-8506-4501-ae84-5f6fa37dfbfb",
+						"alterId": 64
+					}
+				]
+			},
+			"streamSettings": {
+				"network": "ws",
+				"wsSettings": {
+					"path": "/random/path/"
+				}
+			},
+			"tag": "vmess-in"
+		}
+	],
+	"outbounds": [
+		{
+			"protocol": "freedom",
+			"settings": {},
+			"tag": "direct"
+		},
+		{
+			"protocol": "blackhole",
+			"settings": {},
+			"tag": "blocked"
+		}
+	],
+	"routing": {
+		"domainStrategy": "IPIfNonMatch",
+		"rules": [
+			{
+				"type": "field",
+				"protocol": [
+					"bittorrent"
+				],
+				"outboundTag": "blocked"
+			},
+			{
+				"type": "field",
+				"ip": [
+					"geoip:private"
+				],
+				"outboundTag": "blocked"
+			}
+		]
+	}
+}

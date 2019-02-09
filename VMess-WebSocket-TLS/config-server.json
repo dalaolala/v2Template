@@ -1,0 +1,73 @@
+{
+	"log": {
+		"loglevel": "warning"
+	},
+	"inbounds": [
+		{
+			"port": 443,
+			"protocol": "vmess",
+			"sniffing": {
+				"enabled": true,
+				"destOverride": [
+					"http",
+					"tls"
+				]
+			},
+			"settings": {
+				"clients": [
+					{
+						"id": "595f612c-8506-4501-ae84-5f6fa37dfbfb",
+						"alterId": 64
+					}
+				]
+			},
+			"streamSettings": {
+				"network": "ws",
+				"wsSettings": {
+					"path": "/random/path/"
+				},
+				"security": "tls",
+				"tlsSettings": {
+					"certificates": [
+						{
+							"certificateFile": "/etc/v2ray/v2ray.cer",
+							"keyFile": "/etc/v2ray/v2ray.key"
+						}
+					]
+				}
+			},
+			"tag": "vmess-in"
+		}
+	],
+	"outbounds": [
+		{
+			"protocol": "freedom",
+			"settings": {},
+			"tag": "direct"
+		},
+		{
+			"protocol": "blackhole",
+			"settings": {},
+			"tag": "blocked"
+		}
+	],
+	"routing": {
+		"domainStrategy": "IPIfNonMatch",
+		"rules": [
+			{
+				"type": "field",
+				"protocol": [
+					"bittorrent"
+				],
+				"outboundTag": "blocked"
+			},
+			{
+				"type": "field",
+				"ip": [
+					"geoip:private"
+				],
+				"outboundTag": "blocked"
+			}
+		]
+	}
+}

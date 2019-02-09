@@ -1,0 +1,73 @@
+{
+	"log": {
+		"loglevel": "warning"
+	},
+	"inbounds": [
+		{
+			"port": 20000,
+			"protocol": "vmess",
+			"sniffing": {
+				"enabled": true,
+				"destOverride": [
+					"http",
+					"tls"
+				]
+			},
+			"settings": {
+				"clients": [
+					{
+						"id": "595f612c-8506-4501-ae84-5f6fa37dfbfb",
+						"alterId": 64
+					}
+				]
+			},
+			"streamSettings": {
+				"network": "kcp",
+				"kcpSettings": {
+					"mtu": 1350,
+					"tti": 50,
+					"uplinkCapacity": 20,
+					"downlinkCapacity": 100,
+					"congestion": true,
+					"readBufferSize": 2,
+					"writeBufferSize": 2,
+					"header": {
+						"type": "utp"
+					}
+				}
+			},
+			"tag": "vmess-in"
+		}
+	],
+	"outbounds": [
+		{
+			"protocol": "freedom",
+			"settings": {},
+			"tag": "direct"
+		},
+		{
+			"protocol": "blackhole",
+			"settings": {},
+			"tag": "blocked"
+		}
+	],
+	"routing": {
+		"domainStrategy": "IPIfNonMatch",
+		"rules": [
+			{
+				"type": "field",
+				"protocol": [
+					"bittorrent"
+				],
+				"outboundTag": "blocked"
+			},
+			{
+				"type": "field",
+				"ip": [
+					"geoip:private"
+				],
+				"outboundTag": "blocked"
+			}
+		]
+	}
+}
