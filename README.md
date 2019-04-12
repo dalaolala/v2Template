@@ -1,7 +1,5 @@
-# The V2Ray Template
+# V2Ray 模板
 
-Some mainstream configuration templates. 
-
-According to the situation, the configuration file may need to be modified slightly, such as changing the **address**, **port number**, **UUID**, etc.
+一些主流配置的模板，根据情况选择，只需修改 **address**, **port number**, **UUID** 等参数即可。
 
 ![](https://raw.githubusercontent.com/genskyff/vTemplate/master/How_to_choose.png)
